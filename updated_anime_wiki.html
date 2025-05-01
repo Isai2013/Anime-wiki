@@ -1,0 +1,114 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Anime Wiki</title>
+  <style>
+    body {
+      background-color: #111;
+      color: #f0f0f0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+      padding: 20px;
+    }
+    h1 {
+      text-align: center;
+      color: #ff4d4d;
+    }
+    .anime-entry {
+      background-color: #1c1c1c;
+      padding: 15px;
+      margin: 10px 0;
+      border-left: 4px solid #ff4d4d;
+      border-radius: 5px;
+      position: relative;
+    }
+    .delete-btn {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background-color: #ff4d4d;
+      border: none;
+      color: white;
+      padding: 5px 10px;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    .delete-btn:hover {
+      background-color: #e03c3c;
+    }
+    form {
+      margin-top: 30px;
+      background-color: #1c1c1c;
+      padding: 15px;
+      border-radius: 5px;
+    }
+    input, textarea {
+      width: 100%;
+      padding: 8px;
+      margin: 10px 0;
+      border: none;
+      border-radius: 4px;
+      background-color: #2a2a2a;
+      color: #fff;
+    }
+    button {
+      background-color: #ff4d4d;
+      border: none;
+      padding: 10px 15px;
+      color: #fff;
+      cursor: pointer;
+      border-radius: 4px;
+    }
+    button:hover {
+      background-color: #e03c3c;
+    }
+  </style>
+</head>
+<body>
+  <h1>Anime Wiki</h1>
+  <div id="animeList">
+    <div class="anime-entry">
+      <h2>Attack on Titan</h2>
+      <p><strong>Genre:</strong> Action, Drama, Fantasy</p>
+      <p>In a world where giant humanoid Titans prey on humans, Eren Yeager joins the scout regiment to get revenge.</p>
+      <button class="delete-btn" onclick="this.parentElement.remove()">Delete</button>
+    </div>
+    <div class="anime-entry">
+      <h2>Death Note</h2>
+      <p><strong>Genre:</strong> Mystery, Psychological, Supernatural</p>
+      <p>A high school student discovers a notebook that lets him kill anyone by writing their name in it.</p>
+      <button class="delete-btn" onclick="this.parentElement.remove()">Delete</button>
+    </div>
+  </div>
+  <form id="animeForm">
+    <h2>Add Anime</h2>
+    <input type="text" id="title" placeholder="Anime Title" required />
+    <input type="text" id="genre" placeholder="Genre" required />
+    <textarea id="description" placeholder="Description" required></textarea>
+    <button type="submit">Add</button>
+  </form>
+  <script>
+    const form = document.getElementById('animeForm');
+    const list = document.getElementById('animeList');
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      const title = document.getElementById('title').value;
+      const genre = document.getElementById('genre').value;
+      const description = document.getElementById('description').value;
+      const entry = document.createElement('div');
+      entry.classList.add('anime-entry');
+      entry.innerHTML = `
+        <h2>${title}</h2>
+        <p><strong>Genre:</strong> ${genre}</p>
+        <p>${description}</p>
+        <button class="delete-btn" onclick="this.parentElement.remove()">Delete</button>
+      `;
+      list.appendChild(entry);
+      form.reset();
+    });
+  </script>
+</body>
+</html>
